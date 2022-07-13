@@ -1,11 +1,10 @@
-package com.bookstore.GeekText.store.service;
+package com.bookstore.GeekText.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.bookstore.GeekText.store.model.Books;
-import com.bookstore.GeekText.store.repository.MySqlRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bookstore.GeekText.model.Books;
+import com.bookstore.GeekText.repository.MySqlRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class BookServiceImpl implements BookService {
 
-    @Autowired
     private MySqlRepository mySqlRepository;
 
     public BookServiceImpl(MySqlRepository mySqlRepository) {

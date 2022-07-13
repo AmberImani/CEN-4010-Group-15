@@ -1,8 +1,8 @@
-package com.bookstore.GeekText.store.service;
+package com.bookstore.GeekText.service;
 
 import java.util.List;
 
-import com.bookstore.GeekText.store.model.Books;
+import com.bookstore.GeekText.model.Books;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,14 +1,13 @@
-package com.bookstore.GeekText.store;
+package com.bookstore.GeekText;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication(scanBasePackages = {"controller"})
+@SpringBootApplication
+@EnableJpaRepositories
 //@EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
-@EnableJpaRepositories("com.bookstore.GeekText.repository.MySqlRepository")
 //@ComponentScan({"com.bookstore.GeekText.controller.BookRest","com.bookstore.GeekText.service.BookService"})
 public class GeekTextApplication {
 
