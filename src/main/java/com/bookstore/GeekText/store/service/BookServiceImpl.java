@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.bookstore.GeekText.store.model.Books;
-import com.bookstore.GeekText.store.repository.MySqlRepository;
+import com.bookstore.GeekText.store.repository.MyBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,9 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class BookServiceImpl implements BookService {
 
     @Autowired
-    private MySqlRepository mySqlRepository;
+    private MyBookRepository mySqlRepository;
 
-    public BookServiceImpl(MySqlRepository mySqlRepository) {
+    public BookServiceImpl(MyBookRepository mySqlRepository) {
         this.mySqlRepository = mySqlRepository;
     }
 
@@ -44,7 +44,6 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public void save(Books theEmployee) {
         mySqlRepository.save(theEmployee);
-
     }
 
     @Override

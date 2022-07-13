@@ -1,6 +1,7 @@
 package com.bookstore.GeekText.store.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Timestamp;
 
@@ -8,6 +9,8 @@ public class RatingComment {
     @Entity
     @Table (name = "rating_commenting")
     public class RatingAndCommenting{
+
+        @Id
         private int commentId;
         private int userId;
         private int isbn;
