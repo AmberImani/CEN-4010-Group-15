@@ -1,17 +1,12 @@
 package com.bookstore.GeekText.store.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
-public class RatingComment {
-    @Entity
-    @Table (name = "rating_commenting")
-    public class RatingAndCommenting{
-
-        @Id
-        private int commentId;
+ @Entity
+ @Table (name = "rating_commenting")
+    public class RatingComment {
+        private int ratingId;
         private int userId;
         private int isbn;
         private float rating;
@@ -19,11 +14,11 @@ public class RatingComment {
 
         private Timestamp dateStamp;
 
-        public RatingAndCommenting(){
+        public RatingComment(){
         }
 
-        public RatingAndCommenting(int commentId, int userId, int isbn, float rating, String comment, Timestamp dateStamp){
-            this.commentId = commentId;
+        public RatingComment(int ratingId, int userId, int isbn, float rating, String comment, Timestamp dateStamp){
+            this.ratingId = ratingId;
             this.userId = userId;
             this.isbn = isbn;
             this.rating = rating;
@@ -32,13 +27,14 @@ public class RatingComment {
         }
 
         //Setters and Getters
-
-        public int getCommentId() {
-            return commentId;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        public int getRatingId() {
+            return ratingId;
         }
 
-        public void setCommentId(int commentId) {
-            this.commentId = commentId;
+        public void setRatingId(int commentId) {
+            this.ratingId = commentId;
         }
 
         public int getUserId() {
@@ -80,5 +76,4 @@ public class RatingComment {
         public void setDateStamp(Timestamp dateStamp) {
             this.dateStamp = dateStamp;
         }
-    }
 }
