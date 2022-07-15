@@ -1,4 +1,4 @@
-package com.bookstore.GeekText.store.model;
+package com.bookstore.GeekText.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "book_details")
+@Table(name = "bookdetails")
 public class Books {
 
     @Id

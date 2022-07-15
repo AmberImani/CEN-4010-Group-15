@@ -1,11 +1,13 @@
-package com.bookstore.GeekText.store.service;
+package com.bookstore.GeekText.service;
 
-import com.bookstore.GeekText.store.model.RatingComment;
-import com.bookstore.GeekText.store.repository.MyRatingRepository;
+import com.bookstore.GeekText.model.RatingComment;
+import com.bookstore.GeekText.repository.MyRatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class RatingService {
     @Autowired
     private MyRatingRepository ratingRepository;

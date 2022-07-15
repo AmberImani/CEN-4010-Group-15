@@ -1,7 +1,7 @@
-package com.bookstore.GeekText.store.controller;
+package com.bookstore.GeekText.controller;
 
-import com.bookstore.GeekText.store.model.RatingComment;
-import com.bookstore.GeekText.store.service.RatingService;
+import com.bookstore.GeekText.model.RatingComment;
+import com.bookstore.GeekText.service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
