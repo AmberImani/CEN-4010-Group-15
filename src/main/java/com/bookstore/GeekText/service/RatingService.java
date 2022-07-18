@@ -24,4 +24,10 @@ public class RatingService {
     public void deleteRating(Integer id){
         ratingRepository.deleteById(id);
     }
+
+    //Once a rating is created for the book by a user, the same user cannot create another one.
+    //Create a rating for a book by a user on a 5-star scale. Include datestamp.
+    //Create a comment for a book by a user with a date stamp.
+    //Retrieve a SORTED ratings list by highest rating
+    //Retrieve average rating of a book
 }

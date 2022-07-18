@@ -4,11 +4,11 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table (name = "rating_commenting")
+@Table (name = "rating")
 public class RatingComment {
     private int ratingId;
     private int userId;
-    private int isbn;
+    private String isbn;
     private float rating;
     private String comment;
 
@@ -17,7 +17,7 @@ public class RatingComment {
     public RatingComment(){
     }
 
-    public RatingComment(int ratingId, int userId, int isbn, float rating, String comment, Timestamp dateStamp){
+    public RatingComment(int ratingId, int userId, String isbn, float rating, String comment, Timestamp dateStamp){
         this.ratingId = ratingId;
         this.userId = userId;
         this.isbn = isbn;
@@ -45,11 +45,11 @@ public class RatingComment {
         this.userId = userId;
     }
 
-    public int getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
