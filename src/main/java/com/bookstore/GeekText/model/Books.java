@@ -6,11 +6,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "bookdetails")
+@Table(name = "book")
 public class Books {
 
     @Id
-    private Integer isbn;
+    private Long isbn;
+    @Column(name = "name")
     private String title;
     private String description;
     private Double price;
@@ -25,7 +26,7 @@ public class Books {
     public Books() {
     }
 
-    public Books(Integer isbn, String title, String description, Double price, String author, String genre, String publisher, Integer yearPublished, Integer sold) {
+    public Books(Long isbn, String title, String description, Double price, String author, String genre, String publisher, Integer yearPublished, Integer sold) {
         this.isbn = isbn;
         this.title = title;
         this.description = description;
@@ -37,11 +38,11 @@ public class Books {
         this.sold = sold;
     }
 
-    public Integer getIsbn() {
+    public Long getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(Integer isbn) {
+    public void setIsbn(Long isbn) {
         this.isbn = isbn;
     }
 
