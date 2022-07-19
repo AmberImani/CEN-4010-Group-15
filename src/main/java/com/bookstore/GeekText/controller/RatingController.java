@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/rating")
-public class RatingCommentController {
+public class RatingController {
     @Autowired
     RatingService ratingService;
 
@@ -56,15 +56,6 @@ public class RatingCommentController {
         }catch(Exception e){
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-
-    }
-
-    @PostMapping("/create-rating")
-    public void create(@RequestBody RatingComment rating, @RequestParam  Integer userid, @RequestParam String isbn ){
-
-
-        ratingService.saveRating(rating);
     }
 
     @PutMapping("/")
