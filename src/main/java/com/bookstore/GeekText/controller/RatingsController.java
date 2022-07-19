@@ -33,10 +33,10 @@ public class RatingsController {
     }
 
     @PostMapping("/create-rating")
-    public String create (@RequestParam  Integer userid, @RequestParam String isbn,
+    public ResponseEntity<?> create (@RequestParam  Integer userid, @RequestParam String isbn,
                          @RequestParam String comment, @RequestParam Integer rating){
         try {
-            if(userid != null && isbn != null && comment != null && rating != null){
+            if(userid != null && isbn != null){
                 RatingComment ratingComment = new RatingComment();
 
                 ratingComment.setUserId(userid);
@@ -49,11 +49,12 @@ public class RatingsController {
                 ratingComment.setDateStamp(sqlTimeStamp);
 
                 ratingService.saveRating(ratingComment);
+                return new ResponseEntity<>(HttpStatus.CREATED);
             }else{
-                return "Not enough params.";
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
             }
         }catch(Exception e){
-
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
 
@@ -66,10 +67,8 @@ public class RatingsController {
         ratingService.saveRating(rating);
     }
 
-
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update (@PathVariable Integer id, @RequestParam Integer newId){
+    @PutMapping("/")
+    public ResponseEntity<?> update (@RequestParam Integer id, @RequestParam Integer newId){
         try {
             RatingComment existsRating = ratingService.getRating(id);
             existsRating.setRatingId(newId);
