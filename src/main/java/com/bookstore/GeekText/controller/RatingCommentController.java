@@ -3,18 +3,18 @@ package com.bookstore.GeekText.controller;
 import com.bookstore.GeekText.model.RatingComment;
 import com.bookstore.GeekText.service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/rating")
-public class RatingsController {
+public class RatingCommentController {
     @Autowired
     RatingService ratingService;
 
@@ -33,7 +33,7 @@ public class RatingsController {
     }
 
     @PostMapping("/create-rating")
-    public ResponseEntity<?> create (@RequestParam  Integer userid, @RequestParam String isbn,
+    public ResponseEntity<?> create (@RequestParam  Integer userid, @RequestParam BigInteger isbn,
                          @RequestParam String comment, @RequestParam Integer rating){
         try {
             if(userid != null && isbn != null){

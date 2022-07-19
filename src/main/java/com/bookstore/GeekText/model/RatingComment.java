@@ -1,6 +1,7 @@
 package com.bookstore.GeekText.model;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 
 @Entity
@@ -8,7 +9,7 @@ import java.sql.Timestamp;
 public class RatingComment {
     private int ratingId;
     private int userId;
-    private String isbn;
+    private BigInteger isbn;
     private float rating;
     private String comment;
 
@@ -17,7 +18,7 @@ public class RatingComment {
     public RatingComment(){
     }
 
-    public RatingComment(int ratingId, int userId, String isbn, float rating, String comment, Timestamp dateStamp){
+    public RatingComment(int ratingId, int userId, BigInteger isbn, float rating, String comment, Timestamp dateStamp){
         this.ratingId = ratingId;
         this.userId = userId;
         this.isbn = isbn;
@@ -45,11 +46,11 @@ public class RatingComment {
         this.userId = userId;
     }
 
-    public String getIsbn() {
+    public BigInteger getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
+    public void setIsbn(BigInteger isbn) {
         this.isbn = isbn;
     }
 
