@@ -73,7 +73,6 @@ public class RatingController {
     }
 
 
-    //Create a rating for a book by a user on a 5-star scale. Include datestamp.
     //Create a comment for a book by a user with a date stamp.
     //Retrieve a SORTED ratings list by highest rating
     //Retrieve average rating of a book
