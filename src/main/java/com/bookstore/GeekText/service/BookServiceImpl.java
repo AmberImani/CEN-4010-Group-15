@@ -1,5 +1,6 @@
 package com.bookstore.GeekText.service;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Books findById(int isbn) {
+    public Books findById(Long isbn) {
         Optional<Books> result = myBookRepository.findById(isbn);
 
         Books books = null;
@@ -33,7 +34,7 @@ public class BookServiceImpl implements BookService {
         if (result.isPresent())
             books = result.get();
         else
-            throw new RuntimeException("Did not find Book ISBN :" + isbn);
+            throw new RuntimeException("Did not find Book with ISBN:" + isbn);
 
         return books;
     }
@@ -47,7 +48,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public void deleteById(int theId) {
+    public void deleteById(Long theId) {
         myBookRepository.deleteById(theId);
 
     }

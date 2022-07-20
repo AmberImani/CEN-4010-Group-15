@@ -1,15 +1,14 @@
 package com.bookstore.GeekText.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.math.BigInteger;
 
 @Entity
 @Table(name = "book")
 public class Books {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long isbn;
     @Column(name = "name")
     private String title;
