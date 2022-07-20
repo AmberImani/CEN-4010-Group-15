@@ -1,6 +1,5 @@
 package com.bookstore.GeekText.service;
 
-import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,24 +32,15 @@ public class BookServiceImpl implements BookService {
 
         if (result.isPresent())
             books = result.get();
-        else
-            throw new RuntimeException("Did not find Book with ISBN:" + isbn);
 
         return books;
     }
 
     @Override
-    @Transactional
-    public void save(Books theEmployee) {
-        myBookRepository.save(theEmployee);
+    public List<Books> searchBooksByAuthor(Integer author_id) {
+        List<Books> books = myBookRepository.searchBooksByAuthor(author_id);
 
-    }
-
-    @Override
-    @Transactional
-    public void deleteById(Long theId) {
-        myBookRepository.deleteById(theId);
-
+        return books;
     }
 
 }

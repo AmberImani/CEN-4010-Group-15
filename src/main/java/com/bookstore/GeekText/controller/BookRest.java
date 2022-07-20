@@ -3,11 +3,11 @@ package com.bookstore.GeekText.controller;
 import com.bookstore.GeekText.service.BookService;
 import com.bookstore.GeekText.model.Books;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -31,12 +31,17 @@ public class BookRest {
     public Books getBooksById(@PathVariable Long isbn) {
 
         Books books = bookService.findById(isbn);
-        //if (books == null) {
-
-            //throw new RuntimeException("Book with entered isbn not found -" + isbn);
-        //}
 
         return books;
 
     }
+
+    @GetMapping("/searchByAuthor/{authorId}")
+    public List<Books> searchBooksByAuthor(@PathVariable Integer authorId){
+
+        List<Books> books = bookService.searchBooksByAuthor(authorId);
+
+        return books;
+    }
+
 }

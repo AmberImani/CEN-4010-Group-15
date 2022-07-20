@@ -1,7 +1,6 @@
 package com.bookstore.GeekText.model;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 
 @Entity
 @Table(name = "book")
@@ -20,12 +19,13 @@ public class Books {
     @Column(name = "year_published")
     private Integer yearPublished;
     private Integer sold;
+    private Integer author_id;
 
 
     public Books() {
     }
 
-    public Books(Long isbn, String title, String description, Double price, String author, String genre, String publisher, Integer yearPublished, Integer sold) {
+    public Books(Long isbn, String title, String description, Double price, String author, String genre, String publisher, Integer yearPublished, Integer sold, Integer author_id) {
         this.isbn = isbn;
         this.title = title;
         this.description = description;
@@ -35,6 +35,7 @@ public class Books {
         this.publisher = publisher;
         this.yearPublished = yearPublished;
         this.sold = sold;
+        this.author_id = author_id;
     }
 
     public Long getIsbn() {
@@ -107,5 +108,13 @@ public class Books {
 
     public void setSold(Integer sold) {
         this.sold = sold;
+    }
+
+    public Integer getAuthor_id() {
+        return author_id;
+    }
+
+    public void setAuthor_id(Integer author_id) {
+        this.author_id = author_id;
     }
 }

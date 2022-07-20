@@ -14,8 +14,7 @@ public interface BookService {
 
     public Books findById(Long isbn);
 
-    public void save(Books theEmployee);
+    public List<Books> searchBooksByAuthor(Integer author_id);
 
-    public void deleteById(Long theId);
 
 }
