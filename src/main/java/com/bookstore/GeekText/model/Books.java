@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Books {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long isbn;
     @Column(name = "name")
     private String title;

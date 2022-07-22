@@ -43,4 +43,10 @@ public class BookServiceImpl implements BookService {
         return books;
     }
 
+    @Override
+    @Transactional
+    public void save(Books admin) {
+        myBookRepository.save(admin);
+    }
+
 }

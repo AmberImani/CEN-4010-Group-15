@@ -16,5 +16,5 @@ public interface BookService {
 
     public List<Books> searchBooksByAuthor(Integer author_id);
 
-
+    public void save (Books admin);
 }

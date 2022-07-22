@@ -3,6 +3,7 @@ package com.bookstore.GeekText.service;
 import com.bookstore.GeekText.model.Authors;
 import com.bookstore.GeekText.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,8 +18,9 @@ public class AuthorServiceImpl implements AuthorService{
     }
 
     @Override
-    public Authors createAuthor(Authors author){
-        return authorRepository.save(author);
+    @Transactional
+    public void save (Authors authors) {
+        authorRepository.save(authors);
     }
 
 }
