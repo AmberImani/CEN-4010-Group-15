@@ -42,9 +42,8 @@ public class BookRest {
         return books;
     }
 
-    @PostMapping("/add-book")
+    @PostMapping("/admin/add-book")
     public Books addBook(@RequestBody Books books) {
-        //System.out.println("ISBN number: " + books.getIsbn());
         bookService.save(books);
         return books;
 

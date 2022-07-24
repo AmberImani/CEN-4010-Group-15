@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Authors {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.AUTO)
     private Integer author_id;
     private String first_name;
     private String last_name;
