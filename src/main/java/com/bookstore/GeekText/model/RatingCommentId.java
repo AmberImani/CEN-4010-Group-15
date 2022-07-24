@@ -13,13 +13,19 @@ import java.io.Serializable;
 import java.math.BigInteger;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode
 @Table(name = "rating")
 public class RatingCommentId implements Serializable {
     @Id
-    private int user_id;
+    private int userid;
     @Id
     private BigInteger isbn;
+    public RatingCommentId() {
+    }
+    public RatingCommentId(int userid, BigInteger isbn) {
+        this.userid = userid;
+        this.isbn = isbn;
+    }
+
+
 }
