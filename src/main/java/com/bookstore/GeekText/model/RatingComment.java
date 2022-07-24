@@ -11,25 +11,36 @@ import java.sql.Timestamp;
 @Table (name = "rating")
 @IdClass(RatingCommentId.class)
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class RatingComment{
     @Id
-    private int user_id;
+    @JoinColumn(table = "user", name = "userid")
+    private int userid;
     @Id
     private BigInteger isbn;
-    private float rating;
+    private int rating;
     private String comment;
-    @Column(name = "date_stamp", nullable = false)
-    private Timestamp date_stamp;
 
-    //Setters and Getters
-    public int getUserId() {
-        return user_id;
+    @Column(name = "timestamp", nullable = false)
+    private Timestamp timestamp;
+
+    public RatingComment() {
+
     }
 
-    public void setUserId(int userId) {
-        this.user_id = userId;
+    //Setters and Getters
+    public int getUserid() {
+        return userid;
+    }
+    public RatingComment(int userid, BigInteger isbn, int rating, String comment, Timestamp timestamp) {
+        this.userid = userid;
+        this.isbn = isbn;
+        this.rating = rating;
+        this.comment = comment;
+        this.timestamp = timestamp;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
     public BigInteger getIsbn() {
         return isbn;
@@ -43,7 +54,7 @@ public class RatingComment{
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
@@ -55,11 +66,11 @@ public class RatingComment{
         this.comment = comment;
     }
 
-    public Timestamp getDateStamp() {
-        return date_stamp;
+    public Timestamp getTimestamp() {
+        return timestamp;
     }
 
-    public void setDateStamp(Timestamp datestamp) {
-        this.date_stamp = datestamp;
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 }

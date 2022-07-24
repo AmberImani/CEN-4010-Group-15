@@ -1,6 +1,7 @@
 package com.bookstore.GeekText.controller;
 
 import com.bookstore.GeekText.model.RatingComment;
+import com.bookstore.GeekText.model.RatingCommentId;
 import com.bookstore.GeekText.service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,42 +19,50 @@ import java.util.concurrent.atomic.AtomicLong;
 public class RatingController {
     @Autowired
     RatingService ratingService;
-
+    //Get all
     @GetMapping("/")
     public List<RatingComment> list(){
         return ratingService.listAllRatings();
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<RatingComment> get (@PathVariable Integer id){
+    //Get specific
+    @GetMapping("/get-rating")
+    public ResponseEntity<RatingComment> get (@RequestParam int userid, @RequestParam BigInteger isbn){
         try {
-            RatingComment ratingComment = ratingService.getRating(id);
+            RatingComment ratingComment = ratingService.getRating(userid, isbn);
             return new ResponseEntity<RatingComment>(ratingComment, HttpStatus.OK);
         }catch (NoSuchElementException e){
             return new ResponseEntity<RatingComment>(HttpStatus.NOT_FOUND);
         }
+    }
+    @GetMapping("/get-ratings/user/{user_id}")
+    public List<RatingComment> list(@PathVariable int user_id){
+        return ratingService.listByUser(user_id);
+    }
+    @GetMapping("/get-ratings/isbn/{isbn}")
+    public List<RatingComment> list(@PathVariable BigInteger isbn){
+        return ratingService.listSorted(isbn);
+    }
+
+    @GetMapping("/get-rating/average/{isbn}")
+    public String average(@PathVariable BigInteger isbn){
+        return "Average rating: " + ratingService.averageRating(isbn);
     }
 
     @PostMapping("/create-rating")
     public ResponseEntity<?> create (@RequestParam  Integer userid, @RequestParam BigInteger isbn,
                          @RequestParam String comment, @RequestParam Integer rating){
 
-        if(rating < 1 || rating > 5 || comment.length() < 1){
+        if(rating < 1 || rating > 5){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }else{
             try {
                 if(userid != null && isbn != null){
-                    RatingComment ratingComment = new RatingComment();
-                    ratingComment.setUserId(userid);
-                    ratingComment.setIsbn(isbn);
-                    ratingComment.setRating(rating);
-                    ratingComment.setComment(comment);
-
                     long now = System.currentTimeMillis();
                     Timestamp sqlTimeStamp = new Timestamp(now);
-                    ratingComment.setDateStamp(sqlTimeStamp);
 
+                    RatingComment ratingComment = new RatingComment(userid, isbn, rating, comment, sqlTimeStamp);
                     ratingService.saveRating(ratingComment);
-                    return new ResponseEntity<>(HttpStatus.CREATED);
+                    return new ResponseEntity<RatingComment>(ratingComment, HttpStatus.CREATED);
                 }else{
                     return new ResponseEntity(HttpStatus.BAD_REQUEST);
                 }
@@ -63,17 +72,12 @@ public class RatingController {
         }
     }
 
-    @PutMapping("/")
-    public ResponseEntity<?> update (@RequestParam Integer id, @RequestParam Integer newId){
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-    @DeleteMapping("/delete/{id}")
-    public void delete (@PathVariable Integer id){
-        ratingService.deleteRating(id);
+    @DeleteMapping("/delete")
+    public void delete (@RequestParam Integer user_id, @RequestParam BigInteger isbn){
+        ratingService.deleteRating(user_id, isbn);
     }
 
 
-    //Create a comment for a book by a user with a date stamp.
     //Retrieve a SORTED ratings list by highest rating
     //Retrieve average rating of a book
 }
