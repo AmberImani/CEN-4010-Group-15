@@ -49,28 +49,53 @@ public class RatingController {
     }
 
     @PostMapping("/create-rating")
-    public ResponseEntity<?> create (@RequestParam  Integer userid, @RequestParam BigInteger isbn,
-                         @RequestParam String comment, @RequestParam Integer rating){
+    public ResponseEntity<?> createRating (@RequestParam  Integer userid, @RequestParam BigInteger isbn, @RequestParam Integer rating){
+        //comment if any.
+        String comment;
+        try {
+            comment = ratingService.getRating(userid, isbn).getComment();
+        }catch (Exception e) {
+            comment = null;
+        }
 
         if(rating < 1 || rating > 5){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }else{
-            try {
-                if(userid != null && isbn != null){
-                    long now = System.currentTimeMillis();
-                    Timestamp sqlTimeStamp = new Timestamp(now);
-
-                    RatingComment ratingComment = new RatingComment(userid, isbn, rating, comment, sqlTimeStamp);
-                    ratingService.saveRating(ratingComment);
-                    return new ResponseEntity<RatingComment>(ratingComment, HttpStatus.CREATED);
-                }else{
-                    return new ResponseEntity(HttpStatus.BAD_REQUEST);
-                }
-            }catch(Exception e){
-                return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            return getResponseEntity(userid, isbn, rating, comment);
         }
     }
+
+    @PostMapping("/create-comment")
+    public ResponseEntity<?> createComment(@RequestParam  Integer userid, @RequestParam BigInteger isbn,
+                                           @RequestParam String comment){
+        //rating if any
+        int rating;
+        try {
+            rating = (int) ratingService.getRating(userid, isbn).getRating();
+        }catch (Exception e) {
+            rating = -1;
+        }
+
+        return getResponseEntity(userid, isbn, rating, comment);
+    }
+    private ResponseEntity<?> getResponseEntity(@RequestParam Integer userid, @RequestParam BigInteger isbn, @RequestParam Integer rating, String comment) {
+        try {
+            if(userid != null && isbn != null){
+                long now = System.currentTimeMillis();
+                Timestamp sqlTimeStamp = new Timestamp(now);
+                RatingComment ratingComment = new RatingComment(userid, isbn, rating, comment, sqlTimeStamp);
+                ratingService.saveRating(ratingComment);
+                return new ResponseEntity<RatingComment>(ratingComment, HttpStatus.CREATED);
+            }else{
+                return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            }
+        }catch(Exception e){
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+
 
     @DeleteMapping("/delete")
     public void delete (@RequestParam Integer user_id, @RequestParam BigInteger isbn){

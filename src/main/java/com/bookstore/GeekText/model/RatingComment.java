@@ -50,7 +50,7 @@ public class RatingComment{
         this.isbn = isbn;
     }
 
-    public float getRating() {
+    public int getRating() {
         return rating;
     }
 
